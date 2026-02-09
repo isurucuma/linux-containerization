@@ -51,4 +51,4 @@ fi
 echo "Extracting into chroot/"
 tar -xzf "$TMP_ARCHIVE" -C chroot
 
-echo "Done. Rootfs available at: $ROOTFS_DIR"
+echo "Done. Rootfs available at: chroot/"

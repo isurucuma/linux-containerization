@@ -7,6 +7,10 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		panic("usage: run <cmd> [args...] | child <cmd> [args...]")
+	}
+
 	switch os.Args[1] {
 	case "run":
 		run()
@@ -18,9 +22,14 @@ func main() {
 }
 
 func run() {
-	fmt.Printf("Running %v as PID %d\n", os.Args[2:], os.Getpid())
+	if len(os.Args) < 3 {
+		panic("usage: run <cmd> [args...]")
+	}
 
-	cmd := exec.Command("/proc/self/exe", append([]string{"child"}, os.Args[2:]...)...)
+	fmt.Printf("[parent] cmd=%v pid=%d\n", os.Args[2:], os.Getpid())
+
+	args := append([]string{"child"}, os.Args[2:]...)
+	cmd := exec.Command("/proc/self/exe", args...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -31,9 +40,16 @@ func run() {
 }
 
 func child() {
-	fmt.Printf("Running %v as PID %d\n", os.Args[2:], os.Getpid())
+	if len(os.Args) < 3 {
+		panic("usage: child <cmd> [args...]")
+	}
 
-	cmd := exec.Command(os.Args[2], os.Args[3:]...)
+	command := os.Args[2]
+	commandArgs := os.Args[3:]
+
+	fmt.Printf("[child] cmd=%v pid=%d\n", os.Args[2:], os.Getpid())
+
+	cmd := exec.Command(command, commandArgs...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
