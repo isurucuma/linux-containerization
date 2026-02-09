@@ -62,7 +62,7 @@ sudo ./bin/namespaces run /bin/sh
 ### 3) Chroot + namespaces
 
 ```bash
-sudo ./bin/chroot run ./chroot/alpine-minirootfs-3.23.3-x86_64 /bin/sh
+sudo ./bin/chroot run ./chroot /bin/sh
 ```
 
 ## Notes
