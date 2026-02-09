@@ -13,24 +13,24 @@ Small Go programs to learn Linux container primitives step by step.
 - `cmd/without-constraints/main.go`
 - `cmd/namespaces/main.go`
 - `cmd/chroot/main.go`
-- `scripts/setup-chroot.sh` (downloads and extracts Alpine rootfs into `chroot/`)
+- `setup-chroot.sh` (downloads and extracts Alpine rootfs into `chroot/`)
 
 ## Setup Chroot Rootfs
 
 From repository root:
 
 ```bash
-./scripts/setup-chroot.sh
+./setup-chroot.sh
 ```
 
 This creates:
 
-- `chroot/alpine-minirootfs-3.23.3-x86_64/`
+- `chroot/`
 
 If you want to re-download and replace existing files:
 
 ```bash
-./scripts/setup-chroot.sh --force
+./setup-chroot.sh --force
 ```
 
 ## Build
